@@ -5,7 +5,7 @@ namespace Survivor.Managers;
 
 public class TranslationManager
 {
-    public static Matrix _translation;
+    public static Matrix Translation;
 
     public static void CalculateTranslation()
     {
@@ -13,6 +13,6 @@ public class TranslationManager
         dx = MathHelper.Clamp(dx, -Background.Widht + WindowSize.Widht, 0);
         var dy = (WindowSize.Height / 2) - PlayerSprite.Pos.Y;
         dy = MathHelper.Clamp(dy, -Background.Height + WindowSize.Height, 0);
-        _translation = Matrix.CreateTranslation(dx, dy, 0f);
+        Translation = Matrix.CreateTranslation(dx, dy, 0f);
     }
 }

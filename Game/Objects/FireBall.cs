@@ -9,7 +9,7 @@ public class FireBall : SpellParent
     public FireBall()
     {
         Texture = Globals.Content.Load<Texture2D>("Fire");
-        Damage = 0; //TODO: Настроить урон
+        Damage = 1;
     }
 
     public override void Update()

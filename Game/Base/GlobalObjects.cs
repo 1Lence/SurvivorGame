@@ -42,6 +42,4 @@ public class GlobalObjects(Texture2D tex, Vector2 pos) : Sprites(tex, pos)
             Position += dir * Speed * Globals.TotalSeconds;
         }
     }
-    
-    
 }

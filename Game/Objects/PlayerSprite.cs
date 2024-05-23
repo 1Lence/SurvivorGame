@@ -5,10 +5,12 @@ public class PlayerSprite
     public static Vector2 Pos = new(1500, 1500);
     private readonly PlayerDraw _sprite;
     public Vector2 Position;
-    public bool Dead { get; private set; }
+    public bool Dead { get; set; }
     public static int Experience { get; private set; }
 
-    public static bool LevelUp;
+    public static bool FirstLevel;
+    
+    public static bool SecondLevel;
 
     public PlayerSprite()
     {
@@ -30,9 +32,13 @@ public class PlayerSprite
 
     public void Update()
     {
-        if (Experience == 0)
+        if (Experience == 10)
         {
-            LevelUp = true;
+            FirstLevel = true;
+        }
+        if (Experience == 20)
+        {
+            SecondLevel = true;
         }
 
         Position = new Vector2(Pos.X, Pos.Y);

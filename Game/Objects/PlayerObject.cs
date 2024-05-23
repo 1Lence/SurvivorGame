@@ -7,8 +7,9 @@ public class PlayerObject
     private readonly HpBar _healthBar;
     private bool _hit;
     private bool _timeGone = true;
-    public bool _isToHeal; 
+    public bool IsToHeal; 
     private readonly Timer _tm = new(1000);
+    public PlayerSprite _Player;
 
     public PlayerObject(float health = 100f)
     {
@@ -47,11 +48,11 @@ public class PlayerObject
                 return dog;
             }
             
-            /*if (_playerObject.Health == 0)
+            if (_health == 0)
             {
-                Dead = true;
+                _Player.Dead = true;
                 break;
-            }*/
+            }
         }
         return null;
     }
@@ -60,7 +61,7 @@ public class PlayerObject
     {
         _health += heal;
         if (_health > _maxHealth) _health = _maxHealth;
-        _isToHeal = false;
+        IsToHeal = false;
     }
 
     public virtual void Update(List<GlobalObjects> enemies)
@@ -72,7 +73,7 @@ public class PlayerObject
             _hit = false;
         }
 
-        if (_isToHeal)
+        if (IsToHeal)
         {
             Heal(10);
         }

@@ -20,6 +20,8 @@ public class GameManager
         EnemyManager.Reset();
         _player.Reset();
         DroppedObjectManager.Reset();
+        Globals.IsGameActive = false;
+        SpellManager.Reset();
     }
 
     public void Update()

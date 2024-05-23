@@ -9,12 +9,7 @@ public class Spell : GlobalObjects
     {
         Lifespan = data.Lifespan;
     }
-
-    public void Destroy()
-    {
-        Lifespan = 0;
-    }
-
+    
     public void Update()
     {
         Position += Direction * Globals.TotalSeconds;

@@ -6,9 +6,7 @@ public abstract class Globals
     public static ContentManager Content { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
     public static Point Bounds { get; set; }
-    public static bool IsGameActive {  get; set; }
-    public static bool IsGamePaused { get; set; }
-    public static bool IsPlayerDead { get; set; }
+    public static bool IsGameActive { get; set; } = false;
     
     public static void Update(GameTime gt)
     {

@@ -8,7 +8,7 @@ public class DroppedObjectManager
     private static List<Flask> Flasks { get; } = [];
     private static Vector2 _position;
     private static Random _random;
-    public static int RandomSpawn;
+    private static int _randomSpawn;
     public static void Init()
     {
         _textureExp = Globals.Content.Load<Texture2D>("Exp");
@@ -26,10 +26,10 @@ public class DroppedObjectManager
 
     public static void AddObject(Vector2 pos)
     {
-        RandomSpawn = _random.Next(1, 10);
+        _randomSpawn = _random.Next(1, 10);
         
         Experience.Add(new Exp(_textureExp, pos));
-        if (RandomSpawn > 6)
+        if (_randomSpawn > 6)
         {
             Flasks.Add(new Flask(_textureFlask, pos));
         }
@@ -37,17 +37,17 @@ public class DroppedObjectManager
 
     public static void Update(PlayerSprite player, PlayerObject playerObject)
     {
-        foreach (var e in Experience)
+        foreach (var exp in Experience)
         {
-            e.Update();
+            exp.Update();
 
-            if ((e.Position - player.Position).Length() < 150)
+            if ((exp.Position - player.Position).Length() < 150)
             {
-                e.Collect();
+                exp.Collect();
                 player.GetExperience(1);
             }
         }
-        
+        //Методы сбора не получилось совместить из-за разной логики
         foreach (var flask in Flasks)
         {
             flask.Update();
@@ -56,7 +56,7 @@ public class DroppedObjectManager
             {
                 flask.Collect();
                 playerObject.Heal(10);
-                playerObject._isToHeal = true;
+                playerObject.IsToHeal = true;
             }
         }
         
@@ -70,9 +70,9 @@ public class DroppedObjectManager
             Color.White * 0.75f, 0f, Vector2.Zero, 2f,
             SpriteEffects.None, 1f);
 
-        foreach (var e in Experience)
+        foreach (var exp in Experience)
         {
-            e.Draw();
+            exp.Draw();
         }
         
         Globals.SpriteBatch.Draw(_textureFlask, _position, null,

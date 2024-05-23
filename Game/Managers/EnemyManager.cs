@@ -38,7 +38,7 @@ public class EnemyManager
     public static void AddEnemy()
     {
         Enemies.Add(new Dog(_dogTexture, RandomPosition()));
-        if (PlayerSprite.Experience >= 2)
+        if (PlayerSprite.Experience >= 10)
         {
             Enemies.Add(new Cultist(_cultistTexture, RandomPosition()));
         }
@@ -58,11 +58,6 @@ public class EnemyManager
             enemy.Update(player);
         }
         
-        /*foreach (var c in Cultist)
-        {
-            c.Update(player);
-        }*/
-
         Enemies.RemoveAll((dog) => dog.Hp <= 0);
         Enemies.RemoveAll((cultist) => cultist.Hp <= 0);
     }

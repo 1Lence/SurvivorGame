@@ -15,7 +15,7 @@ public class SpellManager
 
     public static void Reset()
     {
-        Projectiles.Clear(); //TODO: Ресет настроить
+        Projectiles.Clear();
     }
 
     public static void AddProjectile(FireExploseData data)
@@ -28,22 +28,23 @@ public class SpellManager
         foreach (var p in Projectiles)
         {
             p.Update();
-            foreach (var enemy in enemies.Where(enemy 
+            foreach (var enemy in enemies.Where(enemy
                          => (p.Position - enemy.Position).Length() < 50))
             {
-                enemy.TakeDamage(10); //TODO: Настроить урон
+                enemy.TakeDamage(1);
                 break;
             }
         }
 
         Projectiles.RemoveAll((p) => p.Lifespan <= 0);
 
-        if (PlayerSprite.LevelUp)
+        if (PlayerSprite.FirstLevel)
         {
             foreach (var spells in Spells)
             {
                 spells.Update();
-                foreach (var enemy in enemies.Where(enemy => Vector2.Distance(spells.GigaPosition, enemy.Position) <= 150))
+                foreach (var enemy in enemies.Where(enemy =>
+                             Vector2.Distance(spells.GigaPosition, enemy.Position) <= 150))
                 {
                     enemy.TakeDamage(spells.Damage);
                     break;
@@ -59,7 +60,7 @@ public class SpellManager
             p.Draw();
         }
 
-        foreach (var spells in Spells.Where(spells => PlayerSprite.LevelUp))
+        foreach (var spells in Spells.Where(spells => PlayerSprite.FirstLevel))
         {
             spells.Draw();
         }
