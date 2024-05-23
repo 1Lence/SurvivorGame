@@ -7,6 +7,7 @@ public class PlayerObject
     private readonly HpBar _healthBar;
     private bool _hit;
     private bool _timeGone = true;
+    public bool _isToHeal; 
     private readonly Timer _tm = new(1000);
 
     public PlayerObject(float health = 100f)
@@ -34,16 +35,16 @@ public class PlayerObject
         if (_health < 0) _health = 0;
     }
 
-    private SpriteSpeed CheckDeath(List<SpriteSpeed> dogs)
+    private GlobalObjects CheckDeath(List<GlobalObjects> dogs)
     {
-        foreach (var z in dogs)
+        foreach (var dog in dogs)
         {
-            if (z.Hp <= 0) continue;
-            if ((PlayerSprite.Pos - z.Position).Length() < 100 && _timeGone)
+            if (dog.Hp <= 0) continue;
+            if ((PlayerSprite.Pos - dog.Position).Length() < 100 && _timeGone)
             {
                 _hit = true;
                 _timeGone = false;
-                return z;
+                return dog;
             }
             
             /*if (_playerObject.Health == 0)
@@ -55,13 +56,14 @@ public class PlayerObject
         return null;
     }
 
-    private void Heal(float heal)
+    public void Heal(float heal)
     {
         _health += heal;
         if (_health > _maxHealth) _health = _maxHealth;
+        _isToHeal = false;
     }
 
-    public virtual void Update(List<SpriteSpeed> enemies)
+    public virtual void Update(List<GlobalObjects> enemies)
     {
         var enemy = CheckDeath(enemies);
         if (_hit && enemy != null)
@@ -70,11 +72,11 @@ public class PlayerObject
             _hit = false;
         }
 
-        if (MouseTestInputManager.MouseRightClicked)
+        if (_isToHeal)
         {
             Heal(10);
         }
-
+        
         _healthBar.Update(_health);
     }
 

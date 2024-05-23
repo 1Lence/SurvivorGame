@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 164 The Power.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:164 The Power.mp3;Music
+
 #begin attack_banner.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -85,6 +91,18 @@
 /processorParam:TextureFormat=Color
 /build:FireBall.png;FireBall
 
+#begin Flask.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Flask.png;Flask
+
 #begin Health.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,4 +126,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pngegg (1).png;Exp
+
+#begin YaUstal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:YaUstal.png;Radik
 

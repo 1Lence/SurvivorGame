@@ -2,9 +2,7 @@ namespace Survivor.Managers;
 
 public class EnemyManager
 {
-    public static List<Dog> Dogs { get; } = [];
-    public static List<Cultist> Cultist { get; } = [];
-    public static List<SpriteSpeed> Enemies { get; } = [];
+    public static List<GlobalObjects> Enemies { get; } = [];
     private static Texture2D _dogTexture;
     private static Texture2D _cultistTexture;
     private static float _spawnCooldown;
@@ -22,7 +20,7 @@ public class EnemyManager
 
     public static void Reset()
     {
-        Dogs.Clear();
+        Enemies.Clear();
         _spawnTime = _spawnCooldown;
     }
 
@@ -40,7 +38,7 @@ public class EnemyManager
     public static void AddEnemy()
     {
         Enemies.Add(new Dog(_dogTexture, RandomPosition()));
-        if (PlayerSprite.Experience == 2)
+        if (PlayerSprite.Experience >= 2)
         {
             Enemies.Add(new Cultist(_cultistTexture, RandomPosition()));
         }
@@ -55,9 +53,9 @@ public class EnemyManager
             AddEnemy();
         }
 
-        foreach (var dog in Enemies)
+        foreach (var enemy in Enemies)
         {
-            dog.Update(player);
+            enemy.Update(player);
         }
         
         /*foreach (var c in Cultist)
@@ -71,9 +69,9 @@ public class EnemyManager
 
     public static void Draw()
     {
-        foreach (var dog in Enemies)
+        foreach (var enemy in Enemies)
         {
-            dog.Draw();
+            enemy.Draw();
         }
     }
 }

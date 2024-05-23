@@ -1,8 +1,8 @@
 namespace Survivor.Objects;
 
-public class Exp(Texture2D tex, Vector2 pos) : SpriteSpeed(tex, pos)
+public class Exp(Texture2D tex, Vector2 pos) : GlobalObjects(tex, pos)
 {
-    public float Lifespan { get; private set; } = Life;
+    public new float Lifespan { get; private set; } = Life;
     private const float Life = 5f;
 
     public void Update()

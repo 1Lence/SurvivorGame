@@ -8,6 +8,8 @@ public class Game1 : Game
     private GameManager _gameManager;
     private readonly Timer _tm = new(1000);
     private bool _timeGone = true;
+    private Song _soundEffect;
+    private SoundEffect _effect;
 
     public Game1()
     {
@@ -18,6 +20,8 @@ public class Game1 : Game
         _tm.Enabled = true;
         _tm.AutoReset = true;
         _tm.Start();
+        
+        
     }
 
     private void TmElapsed(object sender, ElapsedEventArgs e)
@@ -29,7 +33,7 @@ public class Game1 : Game
     {
         _graphics.PreferredBackBufferWidth = WindowSize.Widht;
         _graphics.PreferredBackBufferHeight = WindowSize.Height;
-        _graphics.IsFullScreen = false;  //АНДРЕЙ ПИДАР ПОМЕНЯЙ
+        _graphics.IsFullScreen = false; //TODO: Поменять разрешение
         _graphics.ApplyChanges();
         base.Initialize();
     }
@@ -41,6 +45,10 @@ public class Game1 : Game
         Globals.SpriteBatch = _spriteBatch;
         Globals.Content = Content;
         _gameManager = new GameManager();
+        _soundEffect = Content.Load<Song>("Music");
+        MediaPlayer.Play(_soundEffect);
+        MediaPlayer.IsRepeating = true;
+        MediaPlayer.Volume = 0.1f;
     }
 
     protected override void Update(GameTime gameTime)
@@ -86,6 +94,7 @@ public class Game1 : Game
         Globals.Update(gameTime);
 
         base.Update(gameTime);
+        
     }
 
     protected override void Draw(GameTime gameTime)

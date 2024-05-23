@@ -3,6 +3,7 @@ namespace Survivor.Objects;
 public class Sprites(Texture2D tex, Vector2 pos)
 {
     public Vector2 Position { get; protected set; } = pos;
+    
     private readonly Vector2 _origin = new(tex.Width / 2, tex.Height / 2);
     private Texture2D Texture { get; set; } = tex;
     private readonly Vector2 _scale = Vector2.One;

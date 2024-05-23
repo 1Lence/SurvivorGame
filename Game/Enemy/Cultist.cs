@@ -1,6 +1,6 @@
 namespace Survivor.Enemy;
 
-public class Cultist : SpriteSpeed
+public class Cultist : GlobalObjects
 {
     public Cultist(Texture2D tex, Vector2 pos) : base(tex, pos)
     {

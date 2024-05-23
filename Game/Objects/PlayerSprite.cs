@@ -13,7 +13,7 @@ public class PlayerSprite
     public PlayerSprite()
     {
         var sprite = Globals.Content.Load<Texture2D>("Player");
-        _sprite = new(sprite, 0, Position);
+        _sprite = new PlayerDraw(sprite, 0, Position);
     }
 
     public void Reset()
@@ -30,7 +30,7 @@ public class PlayerSprite
 
     public void Update()
     {
-        if (Experience == 1)
+        if (Experience == 0)
         {
             LevelUp = true;
         }

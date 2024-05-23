@@ -1,9 +1,13 @@
+using System.Drawing;
+
 namespace Survivor.Backgrounds;
 
 public abstract class WindowSize
 {
-    public const int Widht = 1920;
-    public static int Height = 1080;
+    private static readonly Size Resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
+    
+    public static int Widht = Resolution.Width;
+    public static int Height = Resolution.Height;
 }
 
 public abstract class Background

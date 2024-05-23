@@ -12,14 +12,14 @@ public class GameManager
         EnemyManager.Init();
         EnemyManager.AddEnemy();
         SpellManager.Init();
-        ExpManager.Init();
+        DroppedObjectManager.Init();
     }
 
     private void Restart()
     {
         EnemyManager.Reset();
         _player.Reset();
-        ExpManager.Reset();
+        DroppedObjectManager.Reset();
     }
 
     public void Update()
@@ -31,14 +31,14 @@ public class GameManager
         _player.Update();
         SpellManager.Update(EnemyManager.Enemies);
         if (_player.Dead) Restart();
-        ExpManager.Update(_player);
+        DroppedObjectManager.Update(_player, _playerObject);
     }
 
     public void Draw()
     {
         SpellManager.Draw();
         EnemyManager.Draw();
-        ExpManager.Draw();
+        DroppedObjectManager.Draw();
         _playerObject.Draw();
         _player.Draw();
     }

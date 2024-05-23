@@ -4,36 +4,35 @@ public class SpellManager
 {
     private static Texture2D _texture;
     private static List<Spell> Projectiles { get; } = [];
-    private static FireBall _projectile;
+    private static List<SpellParent> Spells { get; } = [];
 
     public static void Init()
     {
-        _projectile = new FireBall();
+        Spells.Add(new FireBall());
+        Spells.Add(new Radiance());
         _texture = Globals.Content.Load<Texture2D>("FireBall");
     }
 
     public static void Reset()
     {
-        Projectiles.Clear();
+        Projectiles.Clear(); //TODO: Ресет настроить
     }
 
-    public static void AddProjectile(SpellData data)
+    public static void AddProjectile(FireExploseData data)
     {
-        Projectiles.Add(new(_texture, data));
+        Projectiles.Add(new Spell(_texture, data));
     }
 
-    public static void Update(List<SpriteSpeed> dogs)
+    public static void Update(List<GlobalObjects> enemies)
     {
         foreach (var p in Projectiles)
         {
             p.Update();
-            foreach (var dog in dogs)
+            foreach (var enemy in enemies.Where(enemy 
+                         => (p.Position - enemy.Position).Length() < 50))
             {
-                if ((p.Position - dog.Position).Length() < 50)
-                {
-                    dog.TakeDamage(1);
-                    break;
-                }
+                enemy.TakeDamage(10); //TODO: Настроить урон
+                break;
             }
         }
 
@@ -41,13 +40,12 @@ public class SpellManager
 
         if (PlayerSprite.LevelUp)
         {
-            _projectile.Update();
-
-            foreach (var dog in dogs)
+            foreach (var spells in Spells)
             {
-                if ((_projectile.Position - dog.Position).Length() < 100)
+                spells.Update();
+                foreach (var enemy in enemies.Where(enemy => Vector2.Distance(spells.GigaPosition, enemy.Position) <= 150))
                 {
-                    dog.TakeDamage(_projectile.Damage);
+                    enemy.TakeDamage(spells.Damage);
                     break;
                 }
             }
@@ -61,9 +59,9 @@ public class SpellManager
             p.Draw();
         }
 
-        if (PlayerSprite.LevelUp)
+        foreach (var spells in Spells.Where(spells => PlayerSprite.LevelUp))
         {
-            _projectile.Draw();
+            spells.Draw();
         }
     }
 }
